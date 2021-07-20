@@ -16,19 +16,18 @@ def classfiy0(inX, dataSet, labels, k):
     # axis: 0 按列 1 按行
     sqDistances = sqDiffMat.sum(axis=1)
     distances = sqDistances**0.5
-    # numpy.argsort() 函数返回的是数组值从小到大的索引值。
+    # numpy.argsort() 函数返回的是数组值从小到大的索引值
     sortedDistIndicies = distances.argsort()
     classCount = {}
     for i in range(k):
         voteIlabel = labels[sortedDistIndicies[i]]
         # get(key, default=None) default: 不存在时返回该值
         classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
-
     # 按第二个关键字 即出现的次数排序 reverse=True即从大到小
     sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(1), reverse=True)
     # 返回出现次数最多的元素的标签
     return sortedClassCount[0][0]
 
-group, labels = createDataSet()
-print(classfiy0([60, 60], group, labels, 3))
 
+group, labels = createDataSet()
+print(classfiy0([100, 60], group, labels, 3))
