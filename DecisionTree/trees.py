@@ -63,11 +63,26 @@ def majoritCnt(classList):
 
 def createTree(dataSet, labels):
     classList = [eg[-1] for eg in dataSet]
+    if classList.count(classList[0]) == len(classList):
+        return classList[0]
+    if len(dataSet) == 1:
+        return majoritCnt(classList)
+    bestFeat = chooseBestFeature(dataSet)
+    bestFeatLabel = labels[bestFeat]
+    myTree = {bestFeatLabel: {}}
+    del(labels[bestFeat])   # 删除该特征
+    featVal = [fg[bestFeat] for fg in dataSet]
+    uniqueFeat = set(featVal)
+    for vals in uniqueFeat:
+        subLabels = labels[:]   # 复制标签
+        myTree[bestFeatLabel][vals] = createTree(splitDataSet(dataSet, bestFeat, vals), subLabels)
+    return myTree
 
 
 
 dataSet, labels = creatDataSet()
-print(chooseBestFeature(dataSet))
+tree = createTree(dataSet, labels)
+print(tree)
 
 
 '''
