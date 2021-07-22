@@ -17,7 +17,7 @@ def calcShannonEnt(dataSet):
 
 def creatDataSet():
     dataSet = [[1, 1, 'yes'],
-               [1, 1, 'yes'],
+               [1, 1, 'no'],
                [1, 0, 'no'],
                [0, 1, 'no'],
                [0, 1, 'no']]
@@ -65,7 +65,7 @@ def createTree(dataSet, labels):
     classList = [eg[-1] for eg in dataSet]
     if classList.count(classList[0]) == len(classList):
         return classList[0]
-    if len(dataSet) == 1:
+    if len(dataSet[0]) == 1:    # 使用完所有特征只剩类别时 返回类别出现次数最多的分类
         return majoritCnt(classList)
     bestFeat = chooseBestFeature(dataSet)
     bestFeatLabel = labels[bestFeat]
@@ -75,14 +75,13 @@ def createTree(dataSet, labels):
     uniqueFeat = set(featVal)
     for vals in uniqueFeat:
         subLabels = labels[:]   # 复制标签
-        myTree[bestFeatLabel][vals] = createTree(splitDataSet(dataSet, bestFeat, vals), subLabels)
+        myTree[bestFeatLabel][vals] = createTree(splitDataSet(dataSet, bestFeat, vals), subLabels)  # 以该值划分数据集
     return myTree
 
 
-
-dataSet, labels = creatDataSet()
-tree = createTree(dataSet, labels)
-print(tree)
+# dataSet, labels = creatDataSet()
+# tree = createTree(dataSet, labels)
+# print(tree)
 
 
 '''
