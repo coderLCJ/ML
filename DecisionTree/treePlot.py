@@ -20,7 +20,7 @@ def plotNode(nodeTxt, centerPt, parentPt, nodeTtye):
 def plotMidText(cntrPt, parentPt, txtString):
     xMid = (parentPt[0]-cntrPt[0])/2.0 + cntrPt[0]
     yMid = (parentPt[1]-cntrPt[1])/2.0 + cntrPt[1]
-    createPlot.ax1.text(xMid, yMid, txtString)
+    createPlot.ax1.text(xMid, yMid, txtString, va="center", ha="center", rotation=30)
 
 def plotTree(myTree, parentPt, nodeTxt):
     numLeafs = getNumLeafs(myTree)
@@ -28,8 +28,8 @@ def plotTree(myTree, parentPt, nodeTxt):
     firstStr = list(myTree.keys())[0]
     cntrPt = (plotTree.xOff + (1.0 + float(numLeafs))/2.0/plotTree.totalW, plotTree.yOff)
     plotMidText(cntrPt, parentPt, nodeTxt)
-    secondDict = myTree[firstStr]
     plotNode(firstStr, cntrPt, parentPt, decisionNode)
+    secondDict = myTree[firstStr]
     plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
     for key in secondDict.keys():
         if type(secondDict[key]).__name__ == 'dict':
@@ -38,7 +38,7 @@ def plotTree(myTree, parentPt, nodeTxt):
             plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
             plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), cntrPt, leafNode)
             plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))
-        plotNode.yOff = plotTree.yOff + 1.0/plotTree.totalD
+    plotNode.yOff = plotTree.yOff + 1.0/plotTree.totalD
 
 def createPlot(inTree):
     fig = plt.figure(1, facecolor='white')
@@ -75,6 +75,7 @@ def getNumDeeps(myTree):
         maxDepth = max(maxDepth, thisDepth)
     return maxDepth
 
+
 # 预先存储好决策树
 def retrieveTree(i):
     listOfTrees = [{'no surfacing': {0: 'no', 1: {'flippers': {0: 'no', 1: 'yes'}}}},
@@ -82,6 +83,21 @@ def retrieveTree(i):
     return listOfTrees[i]
 
 
-myTree = retrieveTree(0)
-print(myTree)
-createPlot(myTree)
+def createData():
+    lables = ['age', 'prescript', 'astigmatic', 'tearRate']
+    fr = open('lenses.txt', 'r')
+    data = fr.readlines()
+    retData = []
+    for i in range(len(data)):
+        temp = data[i].split()
+        if len(temp) == 6:
+            temp[4] += ' ' + temp[5]
+        retData.append(temp[:5])
+    return retData, lables
+
+
+dataSet, labels = createData()
+tree = createTree(dataSet, labels)
+# print(tree)
+createPlot(tree)
+

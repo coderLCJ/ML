@@ -61,7 +61,8 @@ def majoritCnt(classList):
     sortedClassCount = sorted(classClount.items(), key=operator.itemgetter(1), reverse=True)    # 返回的是一个列表
     return sortedClassCount[0][0]
 
-def createTree(dataSet, labels):
+def createTree(dataSet, Labels):
+    labels = Labels[:]
     classList = [eg[-1] for eg in dataSet]
     if classList.count(classList[0]) == len(classList):
         return classList[0]
@@ -78,10 +79,6 @@ def createTree(dataSet, labels):
         myTree[bestFeatLabel][vals] = createTree(splitDataSet(dataSet, bestFeat, vals), subLabels)  # 以该值划分数据集
     return myTree
 
-
-# dataSet, labels = creatDataSet()
-# tree = createTree(dataSet, labels)
-# print(tree)
 
 
 '''
