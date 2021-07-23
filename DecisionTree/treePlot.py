@@ -29,6 +29,7 @@ def plotTree(myTree, parentPt, nodeTxt):
     cntrPt = (plotTree.xOff + (1.0 + float(numLeafs))/2.0/plotTree.totalW, plotTree.yOff)
     plotMidText(cntrPt, parentPt, nodeTxt)
     secondDict = myTree[firstStr]
+    plotNode(firstStr, cntrPt, parentPt, decisionNode)
     plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
     for key in secondDict.keys():
         if type(secondDict[key]).__name__ == 'dict':
