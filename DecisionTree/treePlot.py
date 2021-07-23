@@ -38,7 +38,7 @@ def plotTree(myTree, parentPt, nodeTxt):
             plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
             plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), cntrPt, leafNode)
             plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))
-    plotNode.yOff = plotTree.yOff + 1.0/plotTree.totalD
+    plotTree.yOff = plotTree.yOff + 1.0/plotTree.totalD
 
 def createPlot(inTree):
     fig = plt.figure(1, facecolor='white')
@@ -81,23 +81,4 @@ def retrieveTree(i):
     listOfTrees = [{'no surfacing': {0: 'no', 1: {'flippers': {0: 'no', 1: 'yes'}}}},
                    {'no surfacing': {0: 'no', 1: {'flippers': {0: {'head': {0: 'no', 1: 'yes'}}, 1: 'no'}}}}]
     return listOfTrees[i]
-
-
-def createData():
-    lables = ['age', 'prescript', 'astigmatic', 'tearRate']
-    fr = open('lenses.txt', 'r')
-    data = fr.readlines()
-    retData = []
-    for i in range(len(data)):
-        temp = data[i].split()
-        if len(temp) == 6:
-            temp[4] += ' ' + temp[5]
-        retData.append(temp[:5])
-    return retData, lables
-
-
-dataSet, labels = createData()
-tree = createTree(dataSet, labels)
-# print(tree)
-createPlot(tree)
 

@@ -1,8 +1,7 @@
-import operator
+n = 0
 
-def fun():
-    print('fun')
+def func():
+    print(n)
 
+func()
 
-fun.x = 1
-print(fun.x)

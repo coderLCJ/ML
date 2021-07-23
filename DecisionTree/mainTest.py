@@ -17,13 +17,16 @@ def classify(inputTree, featLables, testVec):
     firstStr = list(inputTree.keys())[0]
     secondDict = inputTree[firstStr]
     featIndex = featLables.index(firstStr)  # 将特征转化为下标
+    flag = 1
     for key in secondDict.keys():
         if testVec[featIndex] == key:
             if type(secondDict[key]).__name__ == 'dict':
                 classLabel = classify(secondDict[key], featLables, testVec)
             else:
                 classLabel = secondDict[key]
-
+            flag = 0
+    if flag:
+        return 'Not exist'
     return classLabel
 
 # 存储决策树
