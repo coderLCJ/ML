@@ -82,3 +82,5 @@ def retrieveTree(i):
                    {'no surfacing': {0: 'no', 1: {'flippers': {0: {'head': {0: 'no', 1: 'yes'}}, 1: 'no'}}}}]
     return listOfTrees[i]
 
+tree = retrieveTree(1)
+createPlot(tree)

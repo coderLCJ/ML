@@ -1,6 +1,15 @@
 from math import log
 import operator
 
+def creatDataSet():
+    dataSet = [[1, 1, 'yes'],
+               [1, 1, 'no'],
+               [1, 0, 'no'],
+               [0, 1, 'no'],
+               [0, 1, 'no']]
+    labels = ['no surfacing', 'flippers']
+    return dataSet, labels
+
 def calcShannonEnt(dataSet):
     numEntries = len(dataSet)
     labelCounts = {}
@@ -14,15 +23,6 @@ def calcShannonEnt(dataSet):
         prob = float(labelCounts[key])/numEntries
         shannonEnt -= prob * log(prob, 2) # log以2为底
     return shannonEnt
-
-def creatDataSet():
-    dataSet = [[1, 1, 'yes'],
-               [1, 1, 'no'],
-               [1, 0, 'no'],
-               [0, 1, 'no'],
-               [0, 1, 'no']]
-    labels = ['no surfacing', 'flippers']
-    return dataSet, labels
 
 def splitDataSet(dataSet, axis, value):
     retDataSet = []
@@ -80,13 +80,11 @@ def createTree(dataSet, Labels):
     return myTree
 
 
-
-'''
-测试不同划分下的数据集的有序度
-print(splitDataSet(dataSet, 0, 0))
-print(splitDataSet(dataSet, 0, 1))
-print('-------------------------')
-print(splitDataSet(dataSet, 1, 0))
-print(splitDataSet(dataSet, 1, 1))
-'''
+# dataSet, labels = creatDataSet()
+# # 测试不同划分下的数据集的有序度
+# print(splitDataSet(dataSet, 0, 0))
+# print(splitDataSet(dataSet, 0, 1))
+# print('-------------------------')
+# print(splitDataSet(dataSet, 1, 0))
+# print(splitDataSet(dataSet, 1, 1))
 

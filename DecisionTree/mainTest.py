@@ -45,5 +45,4 @@ def grabTree(filename):
 # dataSet, labels = creatDataSet()
 # tree = createTree(dataSet, labels)
 # print(tree)
-# storeTree(tree, 'Tree.txt')
-# print(grabTree('Tree.txt'))
+# print(classify(tree, labels, [3, 1]))
