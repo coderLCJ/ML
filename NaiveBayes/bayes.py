@@ -71,6 +71,6 @@ def TestingNB():
     print(testEntry, ' classify as ', classifyNB(thisDoc, p0Vect, p1Vect, pAbusive))
 
 
-TestingNB()
+# TestingNB()
 
 
