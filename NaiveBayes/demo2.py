@@ -1,4 +1,5 @@
 import re
+import feedparser
 from bayes import *
 
 def calcMostFreq(vocabList, fullText):
@@ -35,8 +36,8 @@ def localWords(feed1, feed0):
     for words in top3Words:                 # 去掉出现最多的三个词
         if words[0] in vocabList:
             vocabList.remove(words[0])
-
-    trainSet = range(2 * minlen)
+    print(minlen)
+    trainSet = list(range(2 * minlen))
     testSet = []
     for i in range(20):         # 随机选20个作为测试集
         randIndex = int(random.uniform(0, len(trainSet)))
@@ -47,7 +48,7 @@ def localWords(feed1, feed0):
     for docIndex in trainSet:   # 选出训练集
         trainMat.append(bagOfWords2Vec(vocabList, docList[docIndex]))
         trainClasses.append(classList[docIndex])
-    p0, p1, pSpam = trainNB0(trainMat, trainClasses)
+    p0, p1, pSpam = trainNB0(trainMat, trainClasses)    # 训练数据 得出概率
     # 开始测试
     errorCount = 0
     for testIndex in testSet:
@@ -55,3 +56,9 @@ def localWords(feed1, feed0):
         if classifyNB(vec, p0, p1, pSpam) != classList[testIndex]:
             errorCount += 1
     print('the error rate is ', float(errorCount)/len(testSet))
+    return vocabList, p0, p1
+
+
+ny = feedparser.parse('https://newyork.craigslist.org/stp/index.rss')
+sf = feedparser.parse('https://sfbay.craigslist.org/stp/index.rss')
+# vocabList, pSF, pNY = localWords(ny, sf)
