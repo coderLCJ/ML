@@ -56,7 +56,6 @@ def trainNB0(trainMatrix, trainCatgory):
 def classifyNB(vec2Classify, p0Vec, p1Vec, pClass1):
     p1 = sum(vec2Classify * p1Vec) + log(pClass1)   # 每个词汇出现的概率累加再加到该类别的概率的对数上
     p0 = sum(vec2Classify * p0Vec) + log(pClass1)   # #
-    print(p1, p0)
     return p1 > p0
 
 def TestingNB():
