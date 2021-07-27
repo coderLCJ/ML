@@ -59,6 +59,6 @@ def localWords(feed1, feed0):
     return vocabList, p0, p1
 
 
-ny = feedparser.parse('https://newyork.craigslist.org/stp/index.rss')
+ny = feedparser.parse('https://newyork.craigslist.org/')
 sf = feedparser.parse('https://sfbay.craigslist.org/stp/index.rss')
 # vocabList, pSF, pNY = localWords(ny, sf)

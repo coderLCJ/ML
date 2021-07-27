@@ -2,5 +2,5 @@ import random
 
 import feedparser
 
-ny = feedparser.parse('https://newyork.craigslist.org/')
+ny = feedparser.parse('http://feed.read.org.cn/')
 print(ny['entries'])
