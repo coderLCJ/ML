@@ -1,3 +1,5 @@
+from numpy import *
+
 def loadDataSet():
     dataMat = []
     labelMat = []
@@ -17,3 +19,4 @@ def gradAscent(dataMatIn, classLabels):
 
 dataMat, labelMat = loadDataSet()
 print(dataMat, '\n', labelMat)
+
