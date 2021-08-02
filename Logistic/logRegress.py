@@ -19,4 +19,3 @@ def gradAscent(dataMatIn, classLabels):
 
 dataMat, labelMat = loadDataSet()
 print(dataMat, '\n', labelMat)
-
