@@ -13,6 +13,7 @@ def loadDataSet():
 def sigmoid(inX):
     return 1.0/(1+exp(-inX))
 
+# 梯度上升算法
 def gradAscent(dataMatIn, classLabels):
     dataMatrix = mat(dataMatIn)
     labelMat = mat(classLabels).transpose()
@@ -21,14 +22,40 @@ def gradAscent(dataMatIn, classLabels):
     maxCycles = 500
     weights = ones((n, 1))
     for k in range(maxCycles):
+        # 每次更新系数需要遍历整个数据集
         h = sigmoid(dataMatrix*weights)
         error = labelMat - h
         weights = weights + alpha * dataMatrix.transpose() * error  # dataMatrix和error前后顺序不能调换
     return weights
 
-def plotBestfit(wei):
+# 随机梯度上升算法
+def stocGradAscent0(dataMatrix, classLabels):
+    m, n = shape(dataMatrix)
+    alpha = 0.01
+    weights = ones(n)
+    for i in range(m):
+        h = sigmoid(sum(dataMatrix[i])*weights)
+        error = classLabels[i] - h
+        weights = weights + alpha * dataMatrix[i] * error
+    return weights
+
+# 改进后的随机梯度上升算法
+def stocGradAscent1(dataMatrix, classLabels, numIter=150):
+    m, n = shape(dataMatrix)
+    weights = ones(n)
+    for j in range(numIter):
+        dataIndex = list(range(m))
+        for i in range(m):
+            alpha = 4/(1.0+i+j)+0.0001
+            randIndex = int(random.uniform(0, len(dataIndex)))
+            h = sigmoid(sum(dataMatrix[randIndex]*weights))
+            error = classLabels[randIndex] - h
+            weights = weights + alpha * error * dataMatrix[randIndex]
+            del(dataIndex[randIndex])
+    return weights
+
+def plotBestfit(weights):
     import matplotlib.pyplot as plt
-    weights = wei.getA()
     dataMat, labelMat = loadDataSet()
     dataArr = array(dataMat)
     n = shape(dataArr)[0]
@@ -54,10 +81,12 @@ def plotBestfit(wei):
     plt.ylabel('X2')
     plt.show()
 
+
 dataMat, labelMat = loadDataSet()
 # print(dataMat, '\n', labelMat)
-weights = gradAscent(dataMat, labelMat)
+# weights = gradAscent(dataMat, labelMat)
+# plotBestfit(weights.getA())       # getA()方法将矩阵类型转化为数组 与mat相反
+
+weights = stocGradAscent1(array(dataMat), labelMat)
 print(weights)
 plotBestfit(weights)
-
-
