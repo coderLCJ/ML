@@ -82,11 +82,11 @@ def plotBestfit(weights):
     plt.show()
 
 
-dataMat, labelMat = loadDataSet()
-# print(dataMat, '\n', labelMat)
-# weights = gradAscent(dataMat, labelMat)
-# plotBestfit(weights.getA())       # getA()方法将矩阵类型转化为数组 与mat相反
-
-weights = stocGradAscent1(array(dataMat), labelMat)
-print(weights)
-plotBestfit(weights)
+# dataMat, labelMat = loadDataSet()
+# # print(dataMat, '\n', labelMat)
+# # weights = gradAscent(dataMat, labelMat)
+# # plotBestfit(weights.getA())       # getA()方法将矩阵类型转化为数组 与mat相反
+#
+# weights = stocGradAscent1(array(dataMat), labelMat)
+# print(weights)
+# plotBestfit(weights)
