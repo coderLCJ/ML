@@ -1,10 +1,10 @@
-from mxnet import nd
+import torch
 
 # ----------------------------------------------------- #
 # 广播机制
 # ----------------------------------------------------- #
-A = nd.arange(3).reshape((3, 1))
-B = nd.arange(2).reshape((1, 2))
+A = torch.arange(3).reshape((3, 1))
+B = torch.arange(2).reshape((1, 2))
 '''
 A = 
 [[0.]

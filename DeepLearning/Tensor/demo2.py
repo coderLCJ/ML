@@ -1,10 +1,10 @@
-from mxnet import nd
+import torch
 
 # ----------------------------------------------------- #
 # 索引
 # ----------------------------------------------------- #
 
-A = nd.arange(9).reshape((3, 3))
+A = torch.arange(9).reshape((3, 3))
 A += 1
 print(A)
 
@@ -20,7 +20,7 @@ A = A + 1
 # A += 1                # 不会开辟新内存
 print(before == id(A))  # id为实例ID 每个操作都会开辟新内存 因此为false
 
-Z = A.zeros_like()      # 创建和A相同形状的矩阵
+Z = torch.zeros_like(A) # 创建和A相同形状的矩阵
 before = id(Z)
 Z[:] = Z + 1            # 使用索引完成替换 此时不会开辟新内存
 print(before == id(Z))  # 因此返回true
