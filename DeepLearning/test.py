@@ -1,9 +1,6 @@
 import torch
 
-x = torch.arange(12)
+x = torch.arange(24).reshape(2, 3, 4)
 print(x)
 
-y = torch.zeros_like(x)
-y[:] = x
-y[0] = -1
-print(x, y)
+print(x.sum(dim=[0, 1]))
