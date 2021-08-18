@@ -38,7 +38,7 @@ def sgd(params, lr, batch_size):
             param.grad.zero_()
 
 def training():
-    #生成数据
+    # 生成数据
     true_w = torch.tensor([2, -3.4])
     true_b = 4.2
     features, labels = synthetic_data(true_w, true_b, 1000)
