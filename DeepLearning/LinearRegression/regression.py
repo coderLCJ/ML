@@ -49,6 +49,7 @@ def training():
     loss = squared_loss
     batch_size = 10
     w = torch.normal(0, 0.01, size=(2, 1), requires_grad=True)
+    # w = torch.tensor([[0.], [0.]], requires_grad=True)
     b = torch.zeros(1, requires_grad=True)
 
     for epoch in range(num_epochs):
@@ -60,14 +61,14 @@ def training():
             train_l = loss(net(features, w, b), labels)
             print(epoch, ', loss: %.6f' % train_l.mean())
 
-    # plt.scatter(features[:, 1], labels, 1, 'red')
-    # x = torch.tensor(np.linspace(-4, 4))
-    # y = x * true_w[1] + true_b
-    # plt.plot(x, y, 'green')
-    # ty = x * float(w[1]) + float(b)
+    plt.scatter(features[:, 1], labels, 1, 'blue')
+    x = torch.tensor(np.linspace(-4, 4))
+    y = x * true_w[1] + true_b
+    plt.plot(x, y, 'red')
+    ty = x * float(w[1]) + float(b)
     # plt.plot(x, ty, 'blue')
-    # plt.show()
-    # print(w[1], '\n', b)
+    plt.show()
+    print(w[1], '\n', b)
 
 
 training()
