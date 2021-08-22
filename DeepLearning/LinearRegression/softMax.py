@@ -63,7 +63,6 @@ def load_data_fashion_mnist(batch_size, resize=None):  # @save
 def net(X):
     return softmax(torch.matmul(X.reshape(-1, w.shape[0]), w) + b)
 
-
 def cross_entropy(y_hat, y):
     # 求交叉熵
     return -torch.log(y_hat[range(len(y_hat)), y])
